@@ -1,0 +1,70 @@
+{% extends "base/layout.html" %}
+
+{% block content %}
+    <div class="border border-primary rounded">
+        <div class="container col-md-8">
+            <form class="form-group-sm" method="post" action="/todo/create">
+                <div class="row col-md-12 m-2">
+                    <div class="col-md-6">
+                        <label for="content">Title:</label>
+                        <input required class="form-control mt-2" type="text" name="title" value={{ todo_model.title }}>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="content">Content:</label>
+                        <textarea required class="form-control mt-2" cols="30" rows="3"
+                                  name="content">{{ todo_model.content }}</textarea>
+                    </div>
+                </div>
+                <div class="row col-md-12 m-2">
+                    <div class="col-md-6">
+                        <label for="content">Status:</label>
+                        <input required class="form-control mt-2" type="text" name="status"
+                               value={{ todo_model.status }}>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="content">Completion Date:</label>
+                        <input required class="form-control mt-2" type="date" name="complete_date"
+                               value={{ todo_model.complete_date }}>
+                    </div>
+                </div>
+                <div class="row mt-2">
+                    <div class="col-md-6 d-flex justify-content-end">
+                        <button class="btn btn-primary" type="submit">Submit</button>
+                        <button class="btn btn-primary ms-2" type="reset">Clear</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <hr class="my-5 text-danger">
+        <div class="container col-lg-10">
+            <div>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Title</th>
+                        <th scope="col">Content</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">Completion Date</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for todo in todos %}
+                        <tr>
+                            <td>{{ todo.todo_id }}</td>
+                            <td>{{ todo.title }}</td>
+                            <td>{{ todo.content }}</td>
+                            <td>{{ todo.status }}</td>
+                            <td>{{ todo.complete_date }}</td>
+                            <td>
+                                <a href="{{ url_for('todo_bp.delete', todo_id=todo.todo_id) }}">delete</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}

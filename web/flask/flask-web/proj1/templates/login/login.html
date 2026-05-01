@@ -1,0 +1,13 @@
+{% extends "base/layout.html" %}
+{% block content %}
+    <div class="form-group">
+        <form action="http://localhost/login" method="post">
+            <label for="username" class="form-label">Name</label>
+            <p><input type="text" name="username"/></p>
+            <p>
+                <button class="btn btn-outline-primary" type="submit">Submit</button>
+                <button class="btn btn-outline-danger" type="reset">Clear</button>
+            </p>
+        </form>
+    </div>
+{% endblock %}
